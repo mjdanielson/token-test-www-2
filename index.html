@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Change a map's style</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+<style>
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+</head>
+<body>
+<style>
+    #menu {
+        position: absolute;
+        background: #efefef;
+        padding: 10px;
+        font-family: 'Open Sans', sans-serif;
+    }
+</style>
+
+<div id="map"></div>
+
+<div id="menu">
+    <input id="cky8sw35j7k2o14n87pmcbwuz" type="radio" name="rtoggle" value="satellite" checked="checked">
+    <!-- See a list of Mapbox-hosted public styles at -->
+    <!-- https://docs.mapbox.com/api/maps/styles/#mapbox-styles -->
+    <label for="cky8sw35j7k2o14n87pmcbwuz">Help</label>
+    <input id="cky8sdumz1yj614ruxgulxwvf" type="radio" name="rtoggle" value="light">
+    <label for="cky8sdumz1yj614ruxgulxwvf">Snow Day</label>
+
+</div>
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoibWpkYW5pZWxzb24iLCJhIjoiY2wyNjkxYmdhMGgxejNpcGd0N244dG5pMSJ9.0aK_8_VGJ_fqj92SRMyp-A';
+    const map = new mapboxgl.Map({
+        container: 'map', // container ID
+        style: 'mapbox://styles/mjdanielson/cky8sw35j7k2o14n87pmcbwuz', // style URL
+        center: [-73.17796, 44.41153], // starting position [lng, lat]
+        zoom: 12 // starting zoom
+    });
+
+    const layerList = document.getElementById('menu');
+    const inputs = layerList.getElementsByTagName('input');
+
+    for (const input of inputs) {
+        input.onclick = (layer) => {
+            const layerId = layer.target.id;
+            map.setStyle('mapbox://styles/mjdanielson/' + layerId);
+        };
+    }
+</script>
+
+</body>
+</html>
